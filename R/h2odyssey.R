@@ -111,7 +111,7 @@ create_java_call <-
       # -Xmx30g allocate 30GB of RAM per node. Needs to come before "-jar"
       paste0("-Xmx", memory, "g"),
       # Specify path to downloaded h2o jar.
-      paste0("-jar ,", path),
+      paste0("-jar ", path),
       # Specify a cloud name for the cluster.
       "-name h2o_r",
       # Specify IPs of other nodes.
