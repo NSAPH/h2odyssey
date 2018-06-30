@@ -4,10 +4,15 @@
 \alias{create_java_call}
 \title{Create a Java call to start the h2o worker}
 \usage{
-create_java_call(network = NULL)
+create_java_call(network = NULL, memory = 2,
+  path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar")
 }
 \arguments{
 \item{network}{Network information of the SLURM job}
+
+\item{memory}{The amount of memory per node in GB}
+
+\item{path}{Path of h2o.jar}
 }
 \value{
 A vector of strings to start the h2o workers

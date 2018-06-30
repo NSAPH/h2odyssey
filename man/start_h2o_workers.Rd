@@ -4,10 +4,15 @@
 \alias{start_h2o_workers}
 \title{Start an h2o worker on each node of the SLURM cluster}
 \usage{
-start_h2o_workers(ips = NULL)
+start_h2o_workers(ips = NULL, memory = 2,
+  path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar")
 }
 \arguments{
 \item{ips}{IPs of the nodes of the SLURM job}
+
+\item{memory}{The amount of memory per node in GB}
+
+\item{path}{Path of h2o.jar}
 }
 \value{
 None This function is used for its side effects.

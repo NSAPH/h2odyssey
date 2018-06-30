@@ -90,6 +90,8 @@ get_network <- function(ips = NULL) {
 #' Create a Java call to start the h2o worker
 #'
 #' @param network Network information of the SLURM job
+#' @param memory The amount of memory per node in GB
+#' @param path Path of h2o.jar
 #'
 #' @return A vector of strings to start the h2o workers
 #'
@@ -98,23 +100,26 @@ get_network <- function(ips = NULL) {
 #' ips <- get_ips(node_list)
 #' network <- get_network(ips)
 #' args <- create_java_call(network)
-create_java_call <- function(network = NULL) {
-  if (is.null(network))
-    network <- get_network()
-  # Options to pass to java call:
-  args <- c(
-    # -Xmx30g allocate 30GB of RAM per node. Needs to come before "-jar"
-    "-Xmx150g",
-    # Specify path to downloaded h2o jar.
-    "-jar /n/home03/cchoirat/apps/R/h2o/java/h2o.jar",
-    # Specify a cloud name for the cluster.
-    "-name h2o_r",
-    # Specify IPs of other nodes.
-    paste("-network", network)
-  )
-  cat(paste0("Args:\n", paste(args, collapse = "\n"), "\n"))
-  return(args)
-}
+create_java_call <-
+  function(network = NULL,
+           memory = 2,
+           path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar") {
+    if (is.null(network))
+      network <- get_network()
+    # Options to pass to java call:
+    args <- c(
+      # -Xmx30g allocate 30GB of RAM per node. Needs to come before "-jar"
+      paste0("-Xmx", memory, "g"),
+      # Specify path to downloaded h2o jar.
+      paste0("-jar ,", path),
+      # Specify a cloud name for the cluster.
+      "-name h2o_r",
+      # Specify IPs of other nodes.
+      paste("-network", network)
+    )
+    cat(paste0("Args:\n", paste(args, collapse = "\n"), "\n"))
+    return(args)
+  }
 
 #' Add the SLURM nodes to the list of known hosts
 #'
@@ -138,6 +143,8 @@ make_nodes_known_hosts <- function(ips = NULL) {
 #' Start an h2o worker on each node of the SLURM cluster
 #'
 #' @param ips IPs of the nodes of the SLURM job
+#' @param memory The amount of memory per node in GB
+#' @param path Path of h2o.jar
 #'
 #' @return None This function is used for its side effects.
 #'
@@ -145,7 +152,9 @@ make_nodes_known_hosts <- function(ips = NULL) {
 #' node_list <- detect_nodes()
 #' ips <- get_ips(node_list)
 #' start_h2o_workers(ips)
-start_h2o_workers <- function(ips = NULL) {
+start_h2o_workers <- function(ips = NULL,
+                              memory = 2,
+                              path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar") {
   if (is.null(ips))
     ips <- get_ips()
   # Specify how many nodes we want h2o to use.
@@ -154,7 +163,7 @@ start_h2o_workers <- function(ips = NULL) {
   # Run once for each node we want to start.
   for (node_i in 1:h2o_num_nodes) {
     cat("\nLaunching h2o worker on", ips[node_i], "\n")
-    args <- create_java_call()
+    args <- create_java_call(memory = memory, path = path)
     new_args <- c(ips[node_i], "java", args)
     # Ssh into the target IP and launch an h2o worker with its own
     # output and error files. These could go in a subdirectory.
@@ -180,7 +189,8 @@ start_h2o_workers <- function(ips = NULL) {
 
 #' Start an h2o cluster with an h2o worker on each node of the SLURM cluster
 #'
-#' @param None
+#' @param memory The amount of memory per node in GB
+#' @param path Path of h2o.jar
 #'
 #' @return None This function is used for its side effects.
 #'
@@ -192,10 +202,11 @@ start_h2o_workers <- function(ips = NULL) {
 #' h2o.init(startH2O = FALSE)
 #' # Code here...
 #' h2o.shutdown()
-start_h2o_cluster <- function() {
+start_h2o_cluster <- function(memory = 2,
+                              path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar") {
   node_list <- detect_nodes()
   ips <- get_ips(node_list)
   network <- get_network(ips)
   make_nodes_known_hosts(ips)
-  start_h2o_workers(ips)
+  start_h2o_workers(ips, memory = memory, path = path)
 }
