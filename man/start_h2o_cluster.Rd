@@ -26,4 +26,5 @@ library(h2o)
 h2o.init(startH2O = FALSE)
 # Code here...
 h2o.shutdown()
+
 }

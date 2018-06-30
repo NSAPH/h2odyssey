@@ -9,6 +9,7 @@
 #' @examples
 #' detect_nodes()
 #'
+#' @export
 detect_nodes <- function() {
   # Check on the nodes we have access to.
   node_list <- Sys.getenv("SLURM_JOB_NODELIST")
@@ -26,6 +27,7 @@ detect_nodes <- function() {
 #' node_list <- detect_nodes()
 #' ips <- get_ips(node_list)
 #'
+#' @export
 get_ips <- function(node_list = NULL) {
   if (is.null(node_list))
     node_list <- detect_nodes()
@@ -78,6 +80,7 @@ get_ips <- function(node_list = NULL) {
 #' ips <- get_ips(node_list)
 #' network <- get_network(ips)
 #'
+#' @export
 get_network <- function(ips = NULL) {
   if (is.null(ips))
     ips <- get_ips()
@@ -100,6 +103,8 @@ get_network <- function(ips = NULL) {
 #' ips <- get_ips(node_list)
 #' network <- get_network(ips)
 #' args <- create_java_call(network)
+#'
+#' @export
 create_java_call <-
   function(network = NULL,
            memory = 2,
@@ -131,6 +136,8 @@ create_java_call <-
 #' node_list <- detect_nodes()
 #' ips <- get_ips(node_list)
 #' make_nodes_known_hosts(ips)
+#'
+#' @export
 make_nodes_known_hosts <- function(ips = NULL) {
   if (is.null(ips))
     ips <- get_ips()
@@ -152,6 +159,8 @@ make_nodes_known_hosts <- function(ips = NULL) {
 #' node_list <- detect_nodes()
 #' ips <- get_ips(node_list)
 #' start_h2o_workers(ips)
+#'
+#' @export
 start_h2o_workers <- function(ips = NULL,
                               memory = 2,
                               path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar") {
@@ -202,6 +211,8 @@ start_h2o_workers <- function(ips = NULL,
 #' h2o.init(startH2O = FALSE)
 #' # Code here...
 #' h2o.shutdown()
+#'
+#' @export
 start_h2o_cluster <- function(memory = 2,
                               path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar") {
   node_list <- detect_nodes()

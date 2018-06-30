@@ -24,4 +24,5 @@ Start an h2o worker on each node of the SLURM cluster
 node_list <- detect_nodes()
 ips <- get_ips(node_list)
 start_h2o_workers(ips)
+
 }

@@ -19,4 +19,5 @@ Add the SLURM nodes to the list of known hosts
 node_list <- detect_nodes()
 ips <- get_ips(node_list)
 make_nodes_known_hosts(ips)
+
 }
