@@ -46,10 +46,8 @@ From a compute node:
 
 ```r
 library(h2odyssey)
-start_h2o_cluster(
-  memory = 2, # memory per node in GB
-  path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar" # path of h2o.jar
-  )
+# memory per node in GB
+start_h2o_cluster(memory = 2) 
 library(h2o)
 # Connect to our existing h2o cluster.
 # Do not try to start a new server from R.
