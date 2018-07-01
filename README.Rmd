@@ -1,2 +1,13 @@
 # h2odyssey
 An R package to deploy h2o on the Harvard Odyssey cluster
+
+## Installation
+
+```{r eval=FALSE}
+devtools::install_github("NSAPH/h2odyssey")
+```
+
+## Running `h2odyssey` on Harvard Odyssey
+
+
+
