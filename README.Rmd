@@ -1,7 +1,7 @@
 # h2odyssey
 An R package to deploy h2o on the Harvard Odyssey cluster
 
-## Install R packages on Odyssey
+## Installation of R packages on Odyssey
 
 Modify your `.bashrc` file as follows:
 
@@ -22,13 +22,26 @@ module load R
 export R_LIBS_USER=/n/home03/username/apps/R:$R_LIBS_USER
 ```
 
-## Installation
+## Installation of `h2odyssey`
+
+In an R session:
 
 ```r
 devtools::install_github("NSAPH/h2odyssey")
 ```
 
 ## Running `h2odyssey` on Harvard Odyssey
+
+You first need to start a SLURM job.
+
+```bash
+# Example: we request a total of 2GB on 2 nodes with 10 cores per node in the shared partition
+# srun -p shared --pty --mem 2g -t 0-06:00 -c 20 -N 5 /bin/bash
+
+# Example: we request a total of 300GB on 2 nodes with 32 cores per node in the bigmem partition
+# srun -p bigmem --pty --mem 300g -t 0-06:00  -c 32 -N 2 /bin/bash
+
+From a compute node:
 
 ```r
 library(h2odyssey)
