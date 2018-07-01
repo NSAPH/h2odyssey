@@ -40,6 +40,7 @@ You first need to start a SLURM job.
 
 # Example: we request a total of 300GB on 2 nodes with 32 cores per node in the bigmem partition
 # srun -p bigmem --pty --mem 300g -t 0-06:00  -c 32 -N 2 /bin/bash
+```
 
 From a compute node:
 
