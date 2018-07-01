@@ -24,13 +24,13 @@ export R_LIBS_USER=/n/home03/username/apps/R:$R_LIBS_USER
 
 ## Installation
 
-```{r eval=FALSE}
+```r
 devtools::install_github("NSAPH/h2odyssey")
 ```
 
 ## Running `h2odyssey` on Harvard Odyssey
 
-```{r eval=FALSE}
+```r
 library(h2odyssey)
 start_h2o_cluster(
   memory = 2, # memory per node in GB
