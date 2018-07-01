@@ -58,4 +58,10 @@ start_h2o_cluster(memory = 2)
 h2o.shutdown()
 ```
 
+You can try h2o examples:
+
+https://github.com/h2oai/h2o-tutorials/blob/master/h2o-open-tour-2016/chicago/intro-to-h2o.R
+https://github.com/h2oai/h2o-tutorials/blob/master/tutorials/ensembles-stacking/stacked_ensemble_h2o_xgboost.Rmd
+
+
 
