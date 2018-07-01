@@ -36,7 +36,7 @@ You first need to start a SLURM job.
 
 ```bash
 # Example: we request a total of 2GB on 2 nodes with 10 cores per node in the shared partition
-# srun -p shared  --mem 2g -t 0-06:00 -c 20 -N 2 --pty R
+# srun -p shared  --mem 2g -t 0-06:00 -c 20 -N 2 --pty /bin/bash
 
 # Example: we request a total of 300GB on 2 nodes with 32 cores per node in the bigmem partition
 # srun -p bigmem --pty --mem 300g -t 0-06:00  -c 32 -N 2 /bin/bash
@@ -44,7 +44,7 @@ You first need to start a SLURM job.
 
 To use `screen`:
 ```bash
-# srun -p shared --pty --mem 2g -t 0-06:00 -c 20 -N 2 /bin/bash
+# srun -p shared --pty --mem 2g -t 0-06:00 -c 20 -N 2 R
 ```
 
 From a compute node:
@@ -52,7 +52,7 @@ From a compute node:
 ```r
 library(h2odyssey)
 # memory per node in GB
-# start and connect to an h2o cluster
+# start and connect to an h2o cluster with 2GB of RAM per node
 start_h2o_cluster(memory = 2) 
 # Code here...
 h2o.shutdown()
