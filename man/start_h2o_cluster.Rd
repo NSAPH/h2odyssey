@@ -4,8 +4,7 @@
 \alias{start_h2o_cluster}
 \title{Start an h2o cluster with an h2o worker on each node of the SLURM cluster}
 \usage{
-start_h2o_cluster(memory = 2,
-  path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar")
+start_h2o_cluster(memory = 2, path = NULL)
 }
 \arguments{
 \item{memory}{The amount of memory per node in GB}

@@ -108,9 +108,11 @@ get_network <- function(ips = NULL) {
 create_java_call <-
   function(network = NULL,
            memory = 2,
-           path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar") {
+           path = NULL) {
     if (is.null(network))
       network <- get_network()
+    if (is.null(path))
+      path <- system.file(file.path("java", "h2o.jar"), package = "h2o")
     # Options to pass to java call:
     args <- c(
       # -Xmx30g allocate 30GB of RAM per node. Needs to come before "-jar"
@@ -214,7 +216,9 @@ start_h2o_workers <- function(ips = NULL,
 #'
 #' @export
 start_h2o_cluster <- function(memory = 2,
-                              path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar") {
+                              path = NULL) {
+  if (is.null(path))
+    path <- system.file(file.path("java", "h2o.jar"), package = "h2o")
   node_list <- detect_nodes()
   ips <- get_ips(node_list)
   network <- get_network(ips)
