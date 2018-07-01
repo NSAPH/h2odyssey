@@ -48,7 +48,6 @@ From a compute node:
 library(h2odyssey)
 # memory per node in GB
 start_h2o_cluster(memory = 2) 
-library(h2o)
 # Connect to our existing h2o cluster.
 # Do not try to start a new server from R.
 h2o.init(startH2O = FALSE)
