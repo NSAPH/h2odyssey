@@ -9,5 +9,18 @@ devtools::install_github("NSAPH/h2odyssey")
 
 ## Running `h2odyssey` on Harvard Odyssey
 
+```{r eval=FALSE}
+library(h2odyssey)
+start_h2o_cluster(
+  memory = 2, # memory per node in GB
+  path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar" # path of h2o.jar
+  )
+library(h2o)
+# Connect to our existing h2o cluster.
+# Do not try to start a new server from R.
+h2o.init(startH2O = FALSE)
+# Code here...
+h2o.shutdown()
+```
 
 
