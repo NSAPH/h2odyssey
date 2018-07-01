@@ -3,7 +3,7 @@ An R package to deploy h2o on the Harvard Odyssey cluster
 
 ## Install R packages on Odyssey
 
-Modify your `bashrc` as follows:
+Modify your `.bashrc` file as follows:
 
 ```bash
 # .bashrc
