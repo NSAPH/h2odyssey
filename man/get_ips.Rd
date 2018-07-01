@@ -2,7 +2,7 @@
 % Please edit documentation in R/h2odyssey.R
 \name{get_ips}
 \alias{get_ips}
-\title{Dectect the IPs of the nodes of a SLURM job}
+\title{Detect the IPs of the nodes of a SLURM job}
 \usage{
 get_ips(node_list = NULL)
 }
@@ -13,7 +13,7 @@ get_ips(node_list = NULL)
 List of SLURM IPs
 }
 \description{
-Dectect the IPs of the nodes of a SLURM job
+Detect the IPs of the nodes of a SLURM job
 }
 \examples{
 node_list <- detect_nodes()

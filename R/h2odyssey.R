@@ -17,7 +17,7 @@ detect_nodes <- function() {
   return(node_list)
 }
 
-#' Dectect the IPs of the nodes of a SLURM job
+#' Detect the IPs of the nodes of a SLURM job
 #'
 #' @param node_list Nodes of the SLURM jobs
 #'
