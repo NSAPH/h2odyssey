@@ -2,7 +2,7 @@
 % Please edit documentation in R/h2odyssey.R
 \name{get_network}
 \alias{get_network}
-\title{Dectect the network of the nodes of a SLURM job}
+\title{Detect the network of the nodes of a SLURM job}
 \usage{
 get_network(ips = NULL)
 }
@@ -13,7 +13,7 @@ get_network(ips = NULL)
 List of SLURM network
 }
 \description{
-Dectect the network of the nodes of a SLURM job
+Detect the network of the nodes of a SLURM job
 }
 \examples{
 node_list <- detect_nodes()

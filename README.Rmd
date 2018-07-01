@@ -1,6 +1,27 @@
 # h2odyssey
 An R package to deploy h2o on the Harvard Odyssey cluster
 
+## Install R packages on Odyssey
+
+Modify your `bashrc` as follows:
+
+```bash
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+. /etc/bashrc
+fi
+
+# User specific aliases and functions
+source new-modules.sh
+
+module load R
+
+# replace username with your username.  You may have to change home03 too.
+export R_LIBS_USER=/n/home03/username/apps/R:$R_LIBS_USER
+```
+
 ## Installation
 
 ```{r eval=FALSE}

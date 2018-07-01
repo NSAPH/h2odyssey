@@ -69,7 +69,7 @@ get_ips <- function(node_list = NULL) {
   return(ips)
 }
 
-#' Dectect the network of the nodes of a SLURM job
+#' Detect the network of the nodes of a SLURM job
 #'
 #' @param ips IPs of the nodes of the SLURM job
 #'
