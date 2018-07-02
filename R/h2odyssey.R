@@ -243,5 +243,5 @@ start_h2o_cluster <- function(memory = 2,
   network <- get_network(ips)
   make_nodes_known_hosts(ips)
   start_h2o_workers(ips, memory = memory, path = path, port = port)
-  h2o.init(startH2O = FALSE)
+  h2o.init(startH2O = FALSE, port = port)
 }
