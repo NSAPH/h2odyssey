@@ -110,12 +110,14 @@ create_java_call <-
   function(network = NULL,
            memory = 2,
            path = NULL,
-           port = 54321) {
+           port = NULL) {
     if (is.null(network))
       network <- get_network()
     if (is.null(path))
       path <-
         system.file(file.path("java", "h2o.jar"), package = "h2o")
+    if (is.null(port))
+      port <- 54321
     # Options to pass to java call:
     args <- c(
       # -Xmx30g allocate 30GB of RAM per node. Needs to come before "-jar"
@@ -159,6 +161,7 @@ make_nodes_known_hosts <- function(ips = NULL) {
 #' @param ips IPs of the nodes of the SLURM job
 #' @param memory The amount of memory per node in GB
 #' @param path Path of h2o.jar
+#' @param port Port of the h2o cluster
 #'
 #' @return None This function is used for its side effects.
 #'
@@ -170,16 +173,22 @@ make_nodes_known_hosts <- function(ips = NULL) {
 #' @export
 start_h2o_workers <- function(ips = NULL,
                               memory = 2,
-                              path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar") {
+                              path = "/n/home03/cchoirat/apps/R/h2o/java/h2o.jar",
+                              port = NULL) {
   if (is.null(ips))
     ips <- get_ips()
+  if (is.null(port))
+    port <- 54321
   # Specify how many nodes we want h2o to use.
   h2o_num_nodes <- length(ips)
   make_nodes_known_hosts(ips)
   # Run once for each node we want to start.
   for (node_i in 1:h2o_num_nodes) {
     cat("\nLaunching h2o worker on", ips[node_i], "\n")
-    args <- create_java_call(memory = memory, path = path)
+    args <-
+      create_java_call(memory = memory,
+                       path = path,
+                       port = port)
     new_args <- c(ips[node_i], "java", args)
     # Ssh into the target IP and launch an h2o worker with its own
     # output and error files. These could go in a subdirectory.
@@ -207,6 +216,7 @@ start_h2o_workers <- function(ips = NULL,
 #'
 #' @param memory The amount of memory per node in GB
 #' @param path Path of h2o.jar
+#' @param port Port of the h2o cluster
 #'
 #' @return None This function is used for its side effects.
 #'
@@ -221,10 +231,13 @@ start_h2o_workers <- function(ips = NULL,
 #'
 #' @export
 start_h2o_cluster <- function(memory = 2,
-                              path = NULL) {
+                              path = NULL,
+                              port = NULL) {
   if (is.null(path))
     path <-
       system.file(file.path("java", "h2o.jar"), package = "h2o")
+  if (is.null(port))
+    port <- 54321
   node_list <- detect_nodes()
   ips <- get_ips(node_list)
   network <- get_network(ips)

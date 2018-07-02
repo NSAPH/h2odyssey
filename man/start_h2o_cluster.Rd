@@ -4,12 +4,14 @@
 \alias{start_h2o_cluster}
 \title{Start an h2o cluster with an h2o worker on each node of the SLURM cluster}
 \usage{
-start_h2o_cluster(memory = 2, path = NULL)
+start_h2o_cluster(memory = 2, path = NULL, port = NULL)
 }
 \arguments{
 \item{memory}{The amount of memory per node in GB}
 
 \item{path}{Path of h2o.jar}
+
+\item{port}{Port of the h2o cluster}
 }
 \value{
 None This function is used for its side effects.

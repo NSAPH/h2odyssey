@@ -4,7 +4,7 @@
 \alias{create_java_call}
 \title{Create a Java call to start the h2o worker}
 \usage{
-create_java_call(network = NULL, memory = 2, path = NULL, port = 54321)
+create_java_call(network = NULL, memory = 2, path = NULL, port = NULL)
 }
 \arguments{
 \item{network}{Network information of the SLURM job}
