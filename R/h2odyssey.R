@@ -95,6 +95,7 @@ get_network <- function(ips = NULL) {
 #' @param network Network information of the SLURM job
 #' @param memory The amount of memory per node in GB
 #' @param path Path of h2o.jar
+#' @param port Port of the h2o cluster
 #'
 #' @return A vector of strings to start the h2o workers
 #'
@@ -108,7 +109,8 @@ get_network <- function(ips = NULL) {
 create_java_call <-
   function(network = NULL,
            memory = 2,
-           path = NULL) {
+           path = NULL,
+           port = 54321) {
     if (is.null(network))
       network <- get_network()
     if (is.null(path))
@@ -123,7 +125,9 @@ create_java_call <-
       # Specify a cloud name for the cluster.
       "-name h2o_r",
       # Specify IPs of other nodes.
-      paste("-network", network)
+      paste("-network", network),
+      # Specify port.
+      paste("-port", port)
     )
     cat(paste0("Args:\n", paste(args, collapse = "\n"), "\n"))
     return(args)
