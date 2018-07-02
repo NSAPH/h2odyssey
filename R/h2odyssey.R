@@ -194,7 +194,7 @@ start_h2o_workers <- function(ips = NULL,
   }
   # Wait 3 more seconds to find all the nodes, otherwise we may only
   # find the node on localhost.
-  Sys.sleep(3L)
+  Sys.sleep(30L)
   # Check if h2o is running. We will see ssh processes and one java process.
   system2("ps", c("-efww", "| grep h2o.jar"), stdout = TRUE)
 }
