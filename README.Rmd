@@ -3,6 +3,13 @@ An R package to deploy h2o on the Harvard Odyssey cluster
 
 ## Installation of R packages on Odyssey
 
+Create the folder `apps/R` in your home folder
+
+```bash
+mkdir apps
+mkdir apps/R
+```
+
 Modify your `.bashrc` file as follows:
 
 ```bash
